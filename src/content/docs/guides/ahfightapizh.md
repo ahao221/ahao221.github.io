@@ -45,6 +45,17 @@ using AhFight;
 | `ModifyAhFightRegen(Agent agent, float amount)` | 修改角色AH恢复速率 |
 | `InitializeAhFightData(Agent agent)` | 初始化角色的AH数据 |
 
+### UI Interface
+
+| 方法 | 描述 |
+|------|------|
+| `IsDefaultUIEnabled()` | 检查AhFight UI是否已启用。 |
+| `GetAhFightView()` | 获取 AhFightView 实例 |
+| `GetMainAgentAhFightUIValue()` | 获取玩家当前的 AH 值（用户界面显示值） |
+| `GetMainAgentMaxAhFightUIValue()` | 获取玩家的最大 AH 值（用户界面显示值） |
+| `GetMainAgentAhFightStateText()` | 获取玩家当前的 AH 状态文本。 |
+
+
 ## 代码示例
 
 ### 基本用法
@@ -92,6 +103,24 @@ public void OnTick(Agent agent, float dt) {
         OnStateChanged(agent, _lastState, currentState);
         _lastState = currentState;
     }
+}
+```
+### UI 数据获取（用于制作UI）
+
+```csharp
+// Get current player's AH values and state
+int currentAhValue = AhFightAPI.GetMainAgentAhFightUIValue();
+int maxAhValue = AhFightAPI.GetMainAgentMaxAhFightUIValue();
+string stateText = AhFightAPI.GetMainAgentAhFightStateText();
+
+// Check if default UI is enabled
+bool isDefaultUIEnabled = AhFightAPI.IsDefaultUIEnabled();
+
+// Directly access the view model
+AhFightView view = AhFightAPI.GetAhFightView();
+if (view != null) {
+    bool isVisible = view.ShowPlayerAhFightStatus;
+    // Access more properties...
 }
 ```
 

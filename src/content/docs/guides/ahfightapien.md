@@ -45,6 +45,16 @@ using AhFight;
 | `ModifyAhFightRegen(Agent agent, float amount)` | Modify AH regeneration rate |
 | `InitializeAhFightData(Agent agent)` | Initialize AH data for an agent |
 
+### UI Interface
+
+| Method | Description |
+|------|------|
+| `IsDefaultUIEnabled()` | Check if AhFight UI is enabled |
+| `GetAhFightView()` | Get AhFightView instance |
+| `GetMainAgentAhFightUIValue()` | Player's current AH value (UI display value) |
+| `GetMainAgentMaxAhFightUIValue()` | Get Player's maximum AH value (UI display value) |
+| `GetMainAgentAhFightStateText()` | Get Player's current AH state text |
+
 ## Code Examples
 
 ### Basic Usage
@@ -93,8 +103,24 @@ public void OnTick(Agent agent, float dt) {
         _lastState = currentState;
     }
 }
-```
+### UI data acquisition (for making UI)
 
+```csharp
+// Get current player's AH values and state
+int currentAhValue = AhFightAPI.GetMainAgentAhFightUIValue();
+int maxAhValue = AhFightAPI.GetMainAgentMaxAhFightUIValue();
+string stateText = AhFightAPI.GetMainAgentAhFightStateText();
+
+// Check if default UI is enabled
+bool isDefaultUIEnabled = AhFightAPI.IsDefaultUIEnabled();
+
+// Directly access the view model
+AhFightView view = AhFightAPI.GetAhFightView();
+if (view != null) {
+    bool isVisible = view.ShowPlayerAhFightStatus;
+    // Access more properties...
+}
+```
 ## Support and Contact
 
 Discord: https://discord.gg/cjyBzW3jbn 
